@@ -1,16 +1,18 @@
-import { Configuration, OpenAIApi } from "openai";
+import { OpenAIStream, StreamingTextResponse } from 'ai';
+import { OpenAI } from 'openai';
 
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+  dangerouslyAllowBrowser: true,
 });
-const openai = new OpenAIApi(configuration);
 
 export async function getPrediction(gameDetails) {
-  const prompt = `You are Game Day Oracle, an unfiltered sports guru with bold takes. Predict this matchup: ${gameDetails}`;
-  const res = await openai.createChatCompletion({
-    model: "gpt-4",
-    messages: [{ role: "user", content: prompt }],
+  const prompt = `You are Game Day Oracle, a hot take machine. Analyze this matchup and give confident predictions, betting advice (entertainment only), and a fun 'what-if': ${gameDetails}`;
+
+  const res = await openai.chat.completions.create({
+    model: 'gpt-4',
+    messages: [{ role: 'user', content: prompt }],
   });
 
-  return res.data.choices[0].message.content;
+  return res.choices[0].message.content;
 }
