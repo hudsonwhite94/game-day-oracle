@@ -13,7 +13,7 @@ export async function getPrediction(gameDetails) {
 
   try {
     const res = await openai.chat.completions.create({
-      model: 'gpt-4',
+      model: 'o4-mini',
       messages: [{ role: 'user', content: prompt }],
     });
 
