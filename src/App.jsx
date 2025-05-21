@@ -25,7 +25,7 @@ function App() {
     const fetchGames = async () => {
       try {
         const res = await axios.get(
-          'https://www.thesportsdb.com/api/v1/json/792304/eventsnextleague.php?id=4414'
+          'https://www.thesportsdb.com/api/v1/json/792304/eventsnextleague.php?id=4424'
         );
 
         const formatted = res.data.events.map((e) => ({
