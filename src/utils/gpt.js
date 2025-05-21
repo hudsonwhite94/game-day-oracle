@@ -6,8 +6,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export async function getPrediction(gameDetails) {
-  const prompt = `You are Game Day Oracle, an unfiltered sports guru with bold NFL/NCAA takes. Analyze this matchup and give confident predictions, betting angles (disclaimer: for entertainment only), and answer a “what if” question: ${gameDetails}`;
-
+  const prompt = `You are Game Day Oracle, an unfiltered sports guru with bold takes. Predict this matchup: ${gameDetails}`;
   const res = await openai.createChatCompletion({
     model: "gpt-4",
     messages: [{ role: "user", content: prompt }],
