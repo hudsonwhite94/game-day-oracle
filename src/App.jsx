@@ -12,14 +12,24 @@ function App() {
 
   // ✅ Move this function outside of useEffect
   const handleEventClick = async (info) => {
-    const gameDetails = info.event.title;
+    const gameDetails = `${info.event.title} on ${info.event.startStr}`;
+    console.log("Game clicked:", gameDetails); // ✅ log the clicked event
+  
     setSelectedEvent(info.event);
-
-    const prediction = await getCachedOrFetch(gameDetails, () =>
-      getPrediction(gameDetails)
-    );
-    setPrediction(prediction);
+    setPrediction(''); // clear old prediction
+  
+    try {
+      const prediction = await getCachedOrFetch(gameDetails, () =>
+        getPrediction(gameDetails)
+      );
+      console.log("GPT prediction:", prediction); // ✅ log the result
+      setPrediction(prediction);
+    } catch (err) {
+      console.error("Error getting prediction:", err); // ✅ log any GPT error
+      setPrediction("There was an error fetching the prediction.");
+    }
   };
+  
 
   useEffect(() => {
     const fetchGames = async () => {
