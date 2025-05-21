@@ -9,11 +9,11 @@ export async function getPrediction(gameDetails) {
   console.log("Sending prompt to GPT:", gameDetails);
   console.log("API Key loaded:", import.meta.env.VITE_OPENAI_API_KEY); // 🔍 Check if this is undefined
 
-  const prompt = `You are Game Day Oracle, a hot take machine. Analyze this matchup and give confident predictions, betting advice (entertainment only), and a fun 'what-if': ${gameDetails}`;
+  const prompt = `You are Game Day Oracle, a hot take machine. Analyze this matchup and give a confident prediction in the style of Dave Portnoy and a fun 'what-if': ${gameDetails}`;
 
   try {
     const res = await openai.chat.completions.create({
-      model: 'o4-mini',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: prompt }],
     });
 
